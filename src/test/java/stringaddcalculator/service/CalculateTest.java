@@ -27,6 +27,6 @@ public class CalculateTest {
             actual.add(input.charAt(i) - '0');
         }
 
-        assertThat(expect).isEqualTo(Calculate.add(actual));
+        assertThat(expect).isEqualTo(new Calculate().add(actual));
     }
 }

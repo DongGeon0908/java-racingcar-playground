@@ -1,14 +1,17 @@
 package stringaddcalculator.model;
 
+
+import stringaddcalculator.exception.NumberFormat;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Numeral {
+public class Number {
 
     private final List<String> number;
     private final List<Integer> resultNumber;
 
-    public Numeral(List<String> values) {
+    public Number(List<String> values) {
         this.number = values;
         isNumber();
         resultNumber = parseNumber();
@@ -30,7 +33,7 @@ public class Numeral {
 
     private void isNumberOne(String input) {
         if (!input.chars().allMatch(Character::isDigit)) {
-            throw new RuntimeException("잘못된 입력입니다.");
+            throw new NumberFormat();
         }
     }
 

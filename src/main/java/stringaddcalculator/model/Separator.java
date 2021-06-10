@@ -1,5 +1,7 @@
 package stringaddcalculator.model;
 
+import stringaddcalculator.exception.NumberFormat;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -20,8 +22,8 @@ public class Separator {
     }
 
     private void existNumber() {
-        if (this.separatorNumber.size() == 0) {
-            throw new IllegalArgumentException("잘못된 입력입니다.");
+        if (this.separatorNumber.isEmpty()) {
+            throw new NumberFormat();
         }
     }
 

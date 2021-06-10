@@ -1,10 +1,14 @@
 package stringaddcalculator.model;
 
+
+import stringaddcalculator.exception.NumberFormat;
+
 import java.util.regex.Pattern;
 
 public class Validation {
     private final String pattern = "^[0-9]*$";
     private final String PASS_VALIDATE = "PASS";
+    private final int MIN_SIZE = 2;
     private final String input;
 
     public Validation(String input) {
@@ -24,8 +28,8 @@ public class Validation {
     }
 
     private void isSize() {
-        if (input.length() < 2) {
-            throw new IllegalArgumentException("잘못된 입력입니다.");
+        if (input.length() < MIN_SIZE) {
+            throw new NumberFormat();
         }
     }
 
