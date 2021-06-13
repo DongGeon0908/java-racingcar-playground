@@ -16,7 +16,10 @@ public class ParticipationTest {
     void participate() {
         List<String> carName = Arrays.asList("fsdf,sads,wer".split(","));
 
-        List<Car> cars = carName.stream().map(Car::new).collect(Collectors.toList());
+        List<Car> cars = carName.stream()
+                .map(c -> new Car(new Name(c)))
+                .collect(Collectors.toList());
+
         assertThat(cars.size()).isEqualTo(3);
     }
 

@@ -1,24 +1,24 @@
 package racingcar.model;
 
-// 객체끼리 교환하기............
 public class Car {
     private final Name name;
-    private int location = 0;
+    private int location;
 
-    public Car(String name) {
-        this.name = new Name(name);
+    public Car(Name name) {
+        this.name = name;
+        location = 0;
     }
 
     public int getLocation() {
         return location;
     }
 
-    public String getName() {
-        return name.getName();
+    public Name getName() {
+        return name;
     }
 
     public void moveCar() {
-        this.location += new RandomNumber().createRandom();
+        location += new RandomNumber().createRandom();
     }
 
 }

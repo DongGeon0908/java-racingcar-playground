@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import racingcar.model.Car;
+import racingcar.model.Name;
+import racingcar.model.Participation;
+import racingcar.model.Regex;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -15,6 +18,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class RaceTest {
 
+
     @DisplayName("우승자_반환")
     @ParameterizedTest
     @CsvSource({
@@ -24,14 +28,17 @@ public class RaceTest {
     })
     void getWinner(String input) {
         List<String> carName = Arrays.asList(input.split(" "));
-        List<Car> cars = carName.stream().map(Car::new).collect(Collectors.toList());
 
-        int acutal = cars.stream()
-                .map(Car::getLocation)
-                .max(Comparator.comparingInt(l -> l))
-                .orElse(0);
+        Participation participation = new Participation(carName);
 
-        assertThat(acutal).isEqualTo(0);
+        Race race = new Race(participation);
+        String winner = participation.getCars()
+                .stream()
+                .filter(car -> car.getLocation() == race.getWinnerLocation())
+                .map(Car::getName)
+                .map(Name::getNameValue)
+                .collect(Collectors.joining(new Regex().getRegex()));
+
     }
 
 

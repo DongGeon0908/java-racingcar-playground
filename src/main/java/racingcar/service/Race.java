@@ -1,39 +1,43 @@
 package racingcar.service;
 
 import racingcar.model.Car;
+import racingcar.model.Name;
 import racingcar.model.Participation;
+import racingcar.model.Regex;
 
 import java.util.Comparator;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class Race {
-    private final int ZERO = 0;
-    private final List<Car> cars; // new Participation(carName) >>> 이거를 통해서
+    private final int INIT = 0;
+    private final Participation participation;
 
-    public Race(List<String> carName) {
-        this.cars = new Participation(carName).getParticipation(); // List<Car>로 또 받아옴...
+    public Race(Participation participation) {
+        this.participation = participation;
     }
 
     public void proceed() {
-        cars.forEach(Car::moveCar); // :: 공부하기...
+        participation.getCars().forEach(Car::moveCar);
     }
 
-    public List<Car> getCars() {
-        return cars;
+    public Participation getParticipation() {
+        return participation;
     }
 
     public String getWinner() {
-        return cars.stream()
+        return participation.getCars()
+                .stream()
                 .filter(car -> car.getLocation() == getWinnerLocation())
-                .map(car -> car.getName())
-                .collect(Collectors.joining(Separator.REGEX)); // 값을 받아서..
+                .map(Car::getName)
+                .map(Name::getNameValue)
+                .collect(Collectors.joining(new Regex().getRegex()));
     }
 
-    private int getWinnerLocation() {
-        return cars.stream()
+    public int getWinnerLocation() {
+        return participation.getCars()
+                .stream()
                 .map(Car::getLocation)
                 .max(Comparator.comparingInt(l -> l))
-                .orElse(ZERO);
+                .orElse(INIT);
     }
 }

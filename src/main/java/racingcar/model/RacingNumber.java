@@ -1,6 +1,6 @@
 package racingcar.model;
 
-import racingcar.exception.NumberFormat;
+import racingcar.exception.NumberFormatException;
 
 import java.util.regex.Pattern;
 
@@ -16,12 +16,15 @@ public class RacingNumber {
         return racingNumber;
     }
 
-    // 이상함... Validate 메소드를 만들자. (두가지 역함을 가지고 있음)
     private int isNumber(String number) {
-        if (Pattern.matches(this.pattern, number)) {
-            return Integer.parseInt(number);
+        validate(number);
+        return Integer.parseInt(number);
+    }
+
+    private void validate(String number) {
+        if (!Pattern.matches(this.pattern, number)) {
+            throw new NumberFormatException();
         }
-        throw new NumberFormat();
     }
 }
 

@@ -1,5 +1,7 @@
 package racingcar.view;
 
+import racingcar.model.Car;
+
 public class OutputView {
 
     public void outputInitMessage() {
@@ -10,9 +12,9 @@ public class OutputView {
         System.out.println();
     }
 
-    public void outputRacing(String name, int location) {
-        System.out.print(name + " : ");
-        for (int i = 0; i < location; i++) {
+    public void outputRacing(Car car) {
+        System.out.print(car.getName() + " : ");
+        for (int i = 0; i < car.getLocation(); i++) {
             System.out.print("-");
         }
         System.out.println();

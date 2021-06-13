@@ -1,12 +1,12 @@
 package racingcar.service;
 
-import racingcar.exception.NumberSizeOver;
+import racingcar.exception.NumberSizeOverException;
+import racingcar.model.Regex;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class Separator {
-    public static final String REGEX = ","; // REGEX라는 객체를 통해 받아서 진행,,, REGEX X <- STANDARD..
     private final String inputName;
     private final List<String> separatedName;
 
@@ -20,11 +20,14 @@ public class Separator {
     }
 
     private List<String> separated() {
-        if (inputName.length() == 0) {
-            throw new NumberSizeOver();
-        }
+        isEmpty();
+        return Arrays.asList(inputName.split(new Regex().getRegex()));
+    }
 
-        return Arrays.asList(inputName.split(REGEX));
+    private void isEmpty() {
+        if (inputName.isEmpty()) {
+            throw new NumberSizeOverException();
+        }
     }
 
 }

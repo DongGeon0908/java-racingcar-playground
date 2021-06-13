@@ -1,23 +1,23 @@
 package racingcar.model;
 
-import racingcar.exception.NumberSizeOver;
+import racingcar.exception.NumberSizeOverException;
 
 public class Name {
-    private final String carName;
+    private final String name;
     private final int MAX_SIZE = 5;
 
     public Name(String carName) {
-        this.carName = carName;
+        name = carName;
         validateLength();
     }
 
-    public String getName() {
-        return carName;
+    public String getNameValue() {
+        return name;
     }
 
     private void validateLength() {
-        if (carName.length() > MAX_SIZE) {
-            throw new NumberSizeOver();
+        if (name.length() > MAX_SIZE) {
+            throw new NumberSizeOverException();
         }
     }
 }
