@@ -1,5 +1,6 @@
 package racingcar.model;
 
+// 객체끼리 교환하기............
 public class Car {
     private final Name name;
     private int location = 0;

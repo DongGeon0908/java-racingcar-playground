@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Separator {
-    public static final String REGEX = ",";
+    public static final String REGEX = ","; // REGEX라는 객체를 통해 받아서 진행,,, REGEX X <- STANDARD..
     private final String inputName;
     private final List<String> separatedName;
 

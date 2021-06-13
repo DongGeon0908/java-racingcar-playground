@@ -23,17 +23,17 @@ public class PlayRacingCar {
 
         int racingNumber = new RacingNumber(inputView.input()).getRacingNumber();
 
-        Race proceedRace = new Race(carName);
+        Race race = new Race(carName);
 
         outputView.outputInitMessage();
 
-        for (int i = 0; i < racingNumber; i++) {
-            proceedRace.proceed();
-            proceedRace.getCars().forEach(car -> outputView.outputRacing(car.getName(), car.getLocation()));
+        for (int index = 0; index < racingNumber; index++) {
+            race.proceed();
+            race.getCars().forEach(car -> outputView.outputRacing(car.getName(), car.getLocation()));
             outputView.outputEnter();
         }
 
-        outputView.outputWinner(proceedRace.getWinner());
+        outputView.outputWinner(race.getWinner());
 
     }
 }

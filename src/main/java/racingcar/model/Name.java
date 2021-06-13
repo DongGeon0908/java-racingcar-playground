@@ -4,6 +4,7 @@ import racingcar.exception.NumberSizeOver;
 
 public class Name {
     private final String carName;
+    private final int MAX_SIZE = 5;
 
     public Name(String carName) {
         this.carName = carName;
@@ -15,7 +16,7 @@ public class Name {
     }
 
     private void validateLength() {
-        if (carName.length() > 5) {
+        if (carName.length() > MAX_SIZE) {
             throw new NumberSizeOver();
         }
     }

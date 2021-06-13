@@ -15,6 +15,21 @@ import static org.assertj.core.api.AssertionsForClassTypes.in;
 
 public class NumeralTest {
 
+    @DisplayName("문자_숫자_변환")
+    @ParameterizedTest
+    @CsvSource({
+            "12:33:44:55, 4",
+            "145:678:12:33, 4",
+            "1111111|333|3333333, 0"
+    })
+    void parseNumber(String input, int expect) {
+        Separator separator = new Separator(input);
+        List<Integer> actual = new Number(separator).getResultNumber();
+
+        assertThat(actual.size()).isEqualTo(expect);
+    }
+
+
     @DisplayName("입력값_숫자_검사_실패")
     @ParameterizedTest
     @CsvSource({

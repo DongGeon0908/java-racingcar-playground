@@ -1,7 +1,7 @@
 package stringaddcalculator.model;
 
 
-import stringaddcalculator.exception.NumberFormat;
+import stringaddcalculator.exception.NumberInputException;
 
 import java.util.regex.Pattern;
 
@@ -9,6 +9,7 @@ public class Validation {
     private final String pattern = "^[0-9]*$";
     private final String PASS_VALIDATE = "PASS";
     private final int MIN_SIZE = 2;
+    private final int ZERO = 0;
     private final String input;
 
     public Validation(String input) {
@@ -18,7 +19,7 @@ public class Validation {
     public String validate() {
         isSize();
         if (isEmpty()) {
-            return "0";
+            return String.valueOf(ZERO);
         }
 
         if (isOnlyNumber()) {
@@ -29,7 +30,7 @@ public class Validation {
 
     private void isSize() {
         if (input.length() < MIN_SIZE) {
-            throw new NumberFormat();
+            throw new NumberInputException();
         }
     }
 
@@ -38,7 +39,7 @@ public class Validation {
     }
 
     private boolean isOnlyNumber() {
-        return Pattern.matches(this.pattern, input);
+        return Pattern.matches(pattern, input);
     }
 
 }

@@ -13,6 +13,25 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class ValidationTest {
 
+
+    @DisplayName("전체_유효성_검사")
+    @ParameterizedTest
+    @CsvSource({
+            "213|213|@!3123123, PASS",
+            "qweqeqqweqweqwe, PASS",
+            "1223|213|123, PASS",
+            "1, 1",
+            "22, 0"
+    })
+    void validate(String input, String expect) {
+        Validation validation = new Validation(input);
+
+        String actual = validation.validate();
+
+        assertThat(actual).isEqualTo(expect);
+    }
+
+
     @DisplayName("빈_문자열_또는_null_값_검증")
     @Test
     void isEmpty() {

@@ -1,9 +1,13 @@
 package stringaddcalculator.service;
 
-import java.util.List;
+
+import stringaddcalculator.model.Number;
 
 public class Calculate {
-    public int add(List<Integer> number) {
-        return number.stream().mapToInt(n -> n).sum();
+    public int add(Number number) {
+        return number.getResultNumber()
+                .stream()
+                .mapToInt(n -> n)
+                .sum();
     }
 }

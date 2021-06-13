@@ -3,9 +3,8 @@ package stringaddcalculator.service;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import java.util.ArrayList;
-import java.util.List;
+import stringaddcalculator.model.Number;
+import stringaddcalculator.model.Separator;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -14,19 +13,19 @@ public class CalculateTest {
     @DisplayName("더하기_연산")
     @ParameterizedTest
     @CsvSource({
-            "123,6",
-            "46,10",
-            "123456789,45"
+            "1:2:3,6",
+            "4:6,10",
+            "1:2:3:4:5:6:7:8:9,45",
+            "1:2:3:4:5:6:7:8:9,450"
     })
-    void add(String input, String output) {
-        int expect = Integer.parseInt(output);
+    void add(String input, int expect) {
+        Separator separator = new Separator(input);
 
-        List<Integer> actual = new ArrayList<>();
+        Number number = new Number(separator);
 
-        for (int i = 0; i < input.length(); i++) {
-            actual.add(input.charAt(i) - '0');
-        }
+        int actual = new Calculate().add(number);
 
-        assertThat(expect).isEqualTo(new Calculate().add(actual));
+        assertThat(actual).isEqualTo(expect);
     }
+
 }
